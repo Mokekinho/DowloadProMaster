@@ -5,8 +5,11 @@ from loguru import logger
 
 #https://www.youtube.com/watch?v=y8qLhov8QU8 Video com mais detalhes sobre logs
 
+logger.add("Testes/api_requests.log", format="{time} | {level} | {message}", level="INFO", retention="7 days") #cria um arquivo chamado api_requests.log, esse arquivo serve para guardar as informações do que esta acontecendo durante o programa., o campo "format"define o formato que as mesagens devem ser guardadas, o campo "level" define qual nivel é o mais baixo, o campo "rentention" define por quantos dias as mensagens seram guardadas no arquivo, isso faz com que o arquivo não fique enorme.
+#Rentention não funcionou comigo, ver oq esta acontecendo de errado
+
 logger.info("Download iniciado")#para informações
-logger.trace("Voce asseçou o serviço da Google")#mensagem de rastreio
+logger.trace("Voce aceessou o serviço da Google")#mensagem de rastreio
 logger.debug("Esta dando tudo certo")#mesagem de debug
 logger.success("Download realizado com sucesso")#mensagem de suesso
 logger.warning("Esse programa pode quebrar seu computador")#mensagem de aviso

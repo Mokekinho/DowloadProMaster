@@ -1,27 +1,29 @@
 import requests
 import typer
 from loguru import logger
+from datetime import timedelta
 
 app = typer.Typer()
 url = "https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL"
-logger.add("Testes/api_requests.log", format="{time} | {level} | {message}", level="INFO", retention="7 days")
+
+logger.add("Moeda/api_requests.log", format="{time} | {level} | {message}", level="INFO", retention=timedelta(seconds=3))
 
 try:
-    logger.info("Iniciando a requisição de ")
     requisicao = requests.get(url)
-    logger.warning("Erro 404: Recurso não encontrado.")
 
     if(requisicao.status_code == 404):
-        print("❌ Erro 404: Recurso não encontrado.")
+        logger.warning("Erro 404: Recurso não encontrado.")
     elif requisicao.status_code == 500:
-        print("💥 Erro 500: Problema no servidor.")
-    
+        logger.warning("Erro 500: Problema no servidor.")
+
     elif(requisicao.status_code != 200):
-        print(f"⚠️ Erro inesperado: {requisicao.status_code}")
+        logger.warning(f"Erro inesperado: {requisicao.status_code}")
+      
     
 
 except requests.exceptions.RequestException as e: #guarda o valor de requests.exceptions.RequestException numa variavel qualquer, como "e"
-    print(f"Erro de conexão: {e}")
+    logger.error(f"Erro de conexão: {e}")
+   
 
 
 @app.command()
