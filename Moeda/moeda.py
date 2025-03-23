@@ -6,7 +6,7 @@ from datetime import timedelta
 app = typer.Typer()
 url = "https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL"
 
-logger.add("Moeda/api_requests.log", format="{time} | {level} | {message}", level="INFO", retention=timedelta(seconds=3))
+logger.add("Moeda/api_requests.log", format="{time} | {level} | {message}", level="INFO", retention=timedelta(days=7))
 
 try:
     requisicao = requests.get(url)
